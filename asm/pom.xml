@@ -19,5 +19,6 @@
 		<module>asmZ80</module>
 		<module>masm</module>
 		<module>pdp7</module>
+		<module>ptx-isa</module>
 	</modules>
 </project>
