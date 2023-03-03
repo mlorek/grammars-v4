@@ -37,13 +37,13 @@ prog
    ;
 
 directive
-    : CONST alignment? built_in_type id_ array_spec* initializer?
+    : CONST alignment? vector_type? built_in_type id_ array_spec* initializer?
     | ENTRY id_ param_list? body
     | FUNC ret_param? id_ reg_list? body
     | GLOBAL alignment? vector_type? built_in_type id_ array_spec* initializer?
-    | LOCAL built_in_type id_ array_spec* initializer?
+    | LOCAL alignment? vector_type? built_in_type id_ array_spec* initializer?
     | REG vector_type? built_in_type id_list initializer?
-    | SHARED vector_type? built_in_type? id_list array_spec* initializer?
+    | SHARED alignment? vector_type? built_in_type? id_list array_spec* initializer?
     | SREG vector_type? built_in_type? special_register //components
     | STRUCT alignment? id_ '{' struct_field_list '}'
     | SURF
@@ -316,53 +316,52 @@ floating_point_constant
     ;
 
 //------------------
-ALIGN: '.align';
-CONST: '.const';
-ENTRY: '.entry';
-EXTERN: '.extern';
-FILE: '.file';
-FUNC: '.func';
-GLOBAL: '.global';
-LOCAL: '.local';
-LOC: '.loc';
-MAXNCATPERSM: '.maxncatpersm';
-MAXNREG: '.maxnreg';
-MAXNTID: '.maxntid';
-PARAM: '.param';
-REG: '.reg';
-SECTION: '.section';
-SHARED: '.shared';
-SREG: '.sreg';
-STRUCT: '.struct';
-SURF: '.surf';
-TARGET: '.target';
-TEX: '.tex';
-UNION: '.union';
-VERSION: '.version';
-VISIBLE: '.visible';
+ALIGN          : '.align';
+CONST          : '.const';
+ENTRY          : '.entry';
+EXTERN         : '.extern';
+FILE           : '.file';
+FUNC           : '.func';
+GLOBAL         : '.global';
+LOCAL          : '.local';
+LOC            : '.loc';
+MAXNCATPERSM   : '.maxncatpersm';
+MAXNREG        : '.maxnreg';
+MAXNTID        : '.maxntid';
+PARAM          : '.param';
+REG            : '.reg';
+SECTION        : '.section';
+SHARED         : '.shared';
+SREG           : '.sreg';
+STRUCT         : '.struct';
+SURF           : '.surf';
+TARGET         : '.target';
+TEX            : '.tex';
+UNION          : '.union';
+VERSION        : '.version';
+VISIBLE        : '.visible';
 
 //---------------------
-S8: '.s8';
-S16: '.s16';
-S32: '.s32';
-S64: '.s64';
-U8: '.u8';
-U16: '.u16';
-U32: '.u32';
-U64: '.u64';
-F16: '.f16';
-F32: '.f32';
-F64: '.f64';
-B8: '.b8';
-B16: '.b16';
-B32: '.b32';
-B64: '.b64';
-PRED: '.pred';
-V2:   '.v2';
-V4:   '.v4';
+S8             : '.s8';
+S16            : '.s16';
+S32            : '.s32';
+S64            : '.s64';
+U8             : '.u8';
+U16            : '.u16';
+U32            : '.u32';
+U64            : '.u64';
+F16            : '.f16';
+F32            : '.f32';
+F64            : '.f64';
+B8             : '.b8';
+B16            : '.b16';
+B32            : '.b32';
+B64            : '.b64';
+PRED           : '.pred';
+V2             : '.v2';
+V4             : '.v4';
 
-
-ADDRESS_SIZE : '.address_size';
+//ADDRESS_SIZE : '.address_size';
 
 // sm_2x target architectures
 SM_20: 'sm_20';
@@ -380,56 +379,56 @@ DEBUG: 'debug';
 MAP_F64_TO_F32: 'map_f64_to_f32';
 
 // instruction keyword
-ABS: 'abs';
-ADD: 'add';
-ADDC: 'addc';
-AND: 'and';
-ATOM: 'atom';
-BAR: 'bar';
-BRA: 'bra';
-BRKPT: 'brkpt';
-CALL: 'call';
-CNOT: 'cnot';
-COS: 'cos';
-CVT: 'cvt';
-DIV: 'div';
-EX2: 'ex2';
-EXIT: 'exit';
-FMA: 'fma';
-LD: 'ld';
-LG2: 'lg2';
-MAD: 'mad';
-MAD24: 'mad24';
-MAX: 'max';
-MEMBAR: 'membar';
-MIN: 'min';
-MOV: 'mov';
-MUL: 'mul';
-MUL24: 'mul24';
-NEG: 'neg';
-NOT: 'not';
-OR: 'or';
-PMEVENT: 'pmevent';
-RCP: 'rcp';
-RED: 'red';
-REM: 'rem';
-RET: 'ret';
-RSQRT: 'rsqrt';
-SAD: 'sad';
-SELP: 'selp';
-SET: 'set';
-SETP: 'setp';
-SHL: 'shl';
-SHR: 'shr';
-SIN: 'sin';
-SLCT: 'slct';
-SQRT: 'sqrt';
-ST: 'st';
-SUB: 'sub';
-SUBC: 'subc';
-TRAP: 'trap';
-VOTE: 'vote';
-XOR: 'xor';
+ABS           : 'abs';
+ADD           : 'add';
+ADDC          : 'addc';
+AND           : 'and';
+ATOM          : 'atom';
+BAR           : 'bar';
+BRA           : 'bra';
+BRKPT         : 'brkpt';
+CALL          : 'call';
+CNOT          : 'cnot';
+COS           : 'cos';
+CVT           : 'cvt';
+DIV           : 'div';
+EX2           : 'ex2';
+EXIT          : 'exit';
+FMA           : 'fma';
+LD            : 'ld';
+LG2           : 'lg2';
+MAD           : 'mad';
+MAD24         : 'mad24';
+MAX           : 'max';
+MEMBAR        : 'membar';
+MIN           : 'min';
+MOV           : 'mov';
+MUL           : 'mul';
+MUL24         : 'mul24';
+NEG           : 'neg';
+NOT           : 'not';
+OR            : 'or';
+PMEVENT       : 'pmevent';
+RCP           : 'rcp';
+RED           : 'red';
+REM           : 'rem';
+RET           : 'ret';
+RSQRT         : 'rsqrt';
+SAD           : 'sad';
+SELP          : 'selp';
+SET           : 'set';
+SETP          : 'setp';
+SHL           : 'shl';
+SHR           : 'shr';
+SIN           : 'sin';
+SLCT          : 'slct';
+SQRT          : 'sqrt';
+ST            : 'st';
+SUB           : 'sub';
+SUBC          : 'subc';
+TRAP          : 'trap';
+VOTE          : 'vote';
+XOR           : 'xor';
 
 // predefined identifiers
 CLOCK: '%clock';
@@ -450,13 +449,13 @@ WARP_SZ: 'WARP_SZ';
 //
 
 LABEL
-   : [a-zA-Z0-9.] + ':'
-   ;
+    : [a-zA-Z0-9.] + ':'
+    ;
 
 IDENTIFIER
-   : [a-zA-Z] [a-zA-Z0-9_$]*
-   | [_$%] [a-zA-Z0-9_$]+
-   ;
+    : [a-zA-Z] [a-zA-Z0-9_$]*
+    | [_$%] [a-zA-Z0-9_$]+
+    ;
 
 PARAM_VAR_NAME
     : '%' IDENTIFIER '<' DECIMAL_LITERAL '>'
@@ -499,8 +498,8 @@ DOUBLE_PRECISION_FLOATING_POINT_LITERAL
     ;
 
 STRING
-   : '<' [a-zA-Z0-9$*,%/:?#@.]*
-   ;
+    : '<' [a-zA-Z0-9$*,%/:?#@.]*
+    ;
 
 CHAR
     : [a-zA-Z0-9>.] '>'
@@ -535,7 +534,7 @@ EQ             : '==';
 ASSIGN         : '=';
 BIT_BUCKET     : '_';
 
-WS                      : [ \n\r\t]                                            -> channel(HIDDEN);
+WS                      : [ \n\r\t]                                        -> channel(HIDDEN);
 fragment NEWLINE        : '\r'? '\n';
 fragment NEWLINE_EOF    : NEWLINE | EOF;
 EOL                     : [\r\n]+;
