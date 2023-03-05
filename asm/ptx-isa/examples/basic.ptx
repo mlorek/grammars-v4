@@ -1,3 +1,7 @@
+.version 8.1
+.target sm_10
+.address_size 64
+
         .reg    .b32 r1, r2;
         .reg    .s32 i;
         .reg    .v4 .f32 accel;

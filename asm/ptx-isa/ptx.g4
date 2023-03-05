@@ -90,7 +90,7 @@ debugging_directive
 
 other_directives
     : EXTERN id_
-    | VISIBLE id_
+    | VISIBLE id_ //entry, func
     | VERSION major=DECIMAL_LITERAL '.' minor=DECIMAL_LITERAL
     | TARGET //stringlist
     ;
@@ -133,7 +133,7 @@ param_list
     ;
 
 param_decl
-    : PARAM built_in_type id_
+    : PARAM alignment? built_in_type id_
     ;
 
 reg_list
