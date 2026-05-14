@@ -100,8 +100,8 @@ proc_overload
     ;
 
 var_decl
-    : id_list ':' type ('=' expr_list)?
-    | id_list ':=' expr_list
+    : ids_list ':' type ('=' expr_list)?
+    | ids_list ':=' expr_list
     ;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -189,10 +189,10 @@ param_list
     ;
 
 param
-    : id_list ':' '..' type               // variadic
-    | USING id_list ':' type              // `using` parameter modifier
-    | id_list ':' type ('=' expr)?        // named, optional default
-    | id_list ':=' expr                   // named, type-inferred default
+    : ids_list ':' '..' type               // variadic
+    | USING ids_list ':' type              // `using` parameter modifier
+    | ids_list ':' type ('=' expr)?        // named, optional default
+    | ids_list ':=' expr                   // named, type-inferred default
     | poly_param_decl                     // polymorphic $T: typeid  or  $N: int
     | type                                // unnamed
     ;
@@ -208,7 +208,7 @@ return_type
     ;
 
 return_param
-    : id_list ':' type    // named return
+    : ids_list ':' type    // named return
     | type
     ;
 
@@ -246,7 +246,7 @@ struct_field_list
     ;
 
 struct_field
-    : USING? id_list ':' type field_tag?
+    : USING? ids_list ':' type field_tag?
     ;
 
 field_tag
@@ -397,7 +397,7 @@ for_stmt
     : for_directive? FOR block                                          // infinite
     | for_directive? FOR simple_stmt? ';' expr? ';' simple_stmt? block // C-style (init optional)
     | for_directive? FOR '&'? id (',' id)? IN expr block               // range with value[,index]
-    | for_directive? FOR id_list IN range_expr block                    // range into id_list
+    | for_directive? FOR ids_list IN range_expr block                    // range into id_list
     | for_directive? FOR expr block                                     // while-condition
     ;
 
@@ -581,7 +581,7 @@ literal
     | UNINIT
     ;
 
-id_list
+ids_list
     : id (',' id)*
     ;
 
